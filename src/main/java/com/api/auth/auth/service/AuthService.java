@@ -6,8 +6,10 @@ import com.api.auth.auth.controller.TokenResponse;
 import com.api.auth.auth.repository.Token;
 import com.api.auth.auth.repository.TokenRepository;
 import com.api.auth.usuario.repository.User;
+import com.api.auth.usuario.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,8 +18,20 @@ public class AuthService {
 
     private final TokenRepository tokenRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
+    private final UserRepository userRepository;
+
+    private final JwtService jwtService;
+
     public TokenResponse register(RegisterRequest request){
-        return null;
+        var user = User.builder()
+                .name(request.name())
+                .email(request.email())
+                .password(passwordEncoder.encode(request.password()))
+                .build();
+        var savedUser = userRepository.save(user);
+
     }
 
     public TokenResponse login(LoginRequest request){
