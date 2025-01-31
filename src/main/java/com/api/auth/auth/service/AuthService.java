@@ -31,7 +31,10 @@ public class AuthService {
                 .password(passwordEncoder.encode(request.password()))
                 .build();
         var savedUser = userRepository.save(user);
-
+        var jwtToken = jwtService.generateToken(user);
+        var refreshToken = jwtService.generateRefreshToken(user);
+        saveUserToken(savedUser,jwtToken);
+        return new TokenResponse(jwtToken,refreshToken);
     }
 
     public TokenResponse login(LoginRequest request){
@@ -46,9 +49,10 @@ public class AuthService {
                 .expired(false)
                 .revoked(false)
                 .build();
+        tokenRepository.save(token);
     }
 
-    public TokenResponse refreshToken(String authHeader){
+    public TokenResponse refreshToken(final String authHeader){
         return null;
     }
 }

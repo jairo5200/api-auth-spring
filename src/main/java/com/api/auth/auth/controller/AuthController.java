@@ -6,12 +6,25 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/auth")
+//http://localhost:8080/auth/
 @RequiredArgsConstructor
 public class AuthController {
 
+
     private final AuthService service;
+
+
+    @GetMapping("/hola")
+    public ResponseEntity<Map<String,String>> saludar(){
+        Map<String,String> mapa = new HashMap();
+        mapa.put("hola","buenas");
+        return ResponseEntity.ok(mapa);
+    }
 
     @PostMapping("/register")
     public ResponseEntity<TokenResponse> register(@RequestBody final RegisterRequest request){

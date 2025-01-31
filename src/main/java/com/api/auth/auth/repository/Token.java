@@ -28,11 +28,14 @@ public class Token {
     @Enumerated(EnumType.STRING)
     public TokenType tokenType = TokenType.BEARER;
 
-    public boolean revoked;
+    @Column(nullable = false)
+    private Boolean isRevoked;
 
-    public boolean expired;
+    @Column(nullable = false)
+    private Boolean isExpired;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     public User user;
+
 }
