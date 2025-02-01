@@ -4,7 +4,7 @@ server:
 application:
   security:
     jwt:
-      secret-key: mi_super_clave_secreta_que_nadie_ni_469234556_*879/5656895-487_persoñas_saben
+      secret-key: misuperclavesecretaquenadieni4692345568795656895487personassaben
       expiration: 86400000 # a day
       refresh-token:
         expiration: 604800000 # a week

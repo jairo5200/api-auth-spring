@@ -46,8 +46,8 @@ public class AuthService {
                 .user(user)
                 .token(jwtToken)
                 .tokenType(Token.TokenType.BEARER)
-                .expired(false)
-                .revoked(false)
+                .isExpired(false)
+                .isRevoked(false)
                 .build();
         tokenRepository.save(token);
     }
